@@ -10,14 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_21_212359) do
+ActiveRecord::Schema.define(version: 2020_09_21_232526) do
+
+  create_table "commentings", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
+    t.integer "comment_id", null: false
+    t.index ["comment_id"], name: "index_commentings_on_comment_id"
+    t.index ["user_id"], name: "index_commentings_on_user_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "body"
+    t.integer "post_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+  end
 
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "body"
-    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -26,9 +43,10 @@ ActiveRecord::Schema.define(version: 2020_09_21_212359) do
     t.string "crypted_password"
     t.string "salt"
     t.integer "posts"
-    t.integer "comments"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "commentings", "comments"
+  add_foreign_key "commentings", "users"
 end
