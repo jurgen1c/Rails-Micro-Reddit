@@ -29,7 +29,8 @@ Then you can clone the project by typing ```https://github.com/jurgen1c/Rails-Mi
 
 ### Run app
 - Type ```bundle install``` in the root file of the project. 
-- Type ```rails s``` in the root file of the project. 
+- Type ```rails s``` in the root file of the project.
+- Type  ```rails db:migrate``` in the root file of the project.
 
 ## Authors
 
